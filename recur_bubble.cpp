@@ -21,7 +21,7 @@ void bubble_sort(vector<int>& arr,int j){
         }
     }
     j--;
-    bubble_sort(i,arr,j);
+    bubble_sort(arr,j);
     
 
 
@@ -44,9 +44,10 @@ int main() {
 
     if(arr.size() == 0){
         cout << "sorting not possible, array is empty" << endl;
+        return 0;
     }
 
-    bubble_sort(0,arr,arr.size() -1);
+    bubble_sort(arr,arr.size() - 1);
 
     for(int i=0;i<n;i++){
         cout << arr[i] << "-> ";
