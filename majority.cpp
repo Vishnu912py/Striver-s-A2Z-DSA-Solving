@@ -1,70 +1,43 @@
 #include <iostream>
 #include <vector>
+#include <map>
 using namespace std;
+//binary search only works on a sorted array
 
-bool search(int target,vector<int>& arr){
-    int start = 0;
-    int end = arr.size() -1;
-    int found = 0;
-    while(start <= end){
-        int mid = start + (end-start)/2;
-
-        if(arr[mid] > target){
-            end = mid -1;
-        }
-
-        else if(arr[mid] < target){
-            start = mid + 1;
-        }
-
-        else{
-            found = 1;
-            break;
-        }
-    }
-
-
-    if(found ==1){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
 
 int main() {
     
-    vector<int> arr;
-    vector<int> unique;
+    vector<int> arr = {7,0,0,1,7,7,2,7,7};
 
-    int n1;
-    cout << "Enter the length of the arr:" << endl;
-    cin >> n1;
+    int n1 = arr.size();
+    int threshold = n1/3;
 
-    int threshold = n1/2;
 
-    for(int i=0;i<n1;i++){
-        int in1;
-        cout << "Enter the " << i << "th element: " << endl;
-        cin >> in1;
-        arr.push_back(in1);
-    }
+
+
+    map<int,int> majority_element;
 
     for(int i=0;i<n1;i++){
-        if(search(arr[i],unique)){
-            continue;
-        }
-        else{
-            unique.push_back(arr[i]);
+        majority_element[arr[i]]++;
+    }
+
+    int max_freq_element = -1;
+    int max_freq = -1;
+
+    int ele = -1;
+    int freq = -1;
+
+
+    for (const auto& pair : majority_element) {
+        if(pair.second>threshold){
+            max_freq_element = pair.first;
         }
     }
 
-    for(int i=0;i<unique.size();i++){
-        cout << unique[i] << "->";
-    }
-
+    cout << max_freq_element << endl;
 
     
-
+    
+    
     return 0;
 }
