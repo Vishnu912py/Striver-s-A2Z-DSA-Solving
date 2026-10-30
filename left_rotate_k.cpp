@@ -4,43 +4,25 @@
 #include <vector>
 using namespace std;
 
-void left_rotate_k(vector<int>& arr, int k){
-    int len = arr.size();
-    int i=0;
-    int j=k-1;
-
-    while((i+2)%len > 0){
-        int temp1 = i;
-        int temp2 = j;
-        int num;
-        // Boundary condition
-        if((num = (temp2-temp1)%2) < 0){
-            while(temp1 >= (len-num)){
-            int swap = arr[temp2];
-            arr[temp2] = arr[temp1];
-            arr[temp1] = swap;
-            temp1 = (temp1+1)%len;
-            temp2 = (temp2-1)%len;
-            }
-            break;
-        }
-        else{
-        while(temp1 >= (temp1 + (temp2-temp1)/2)){
-            int swap = arr[temp2];
-            arr[temp2] = arr[temp1];
-            arr[temp1] = swap;
-            temp1 = (temp1+1)%len;
-            temp2 = (temp2-1)%len;
-        }
-        }
-        i=(i+1)%len;
-        j=(j+1)%len;
+void left_rotate_1(vector<int>& arr,int k){
+    int n = arr.size();
+    if((k=k%n) < 1){
+        return;
+    }
+    int first = arr[0];
+    
+    for(int i=1;i<n;i++){
+        arr[i-1] = arr[i];
     }
 
+    arr[n-1] = first;
+    k--;
+    left_rotate_1(arr,k);
+
     
-
-
 }
+
+
 
 int main() {
     
@@ -62,9 +44,9 @@ int main() {
     // left rotate by k places
     
     
-    left_rotate_k(arr,k);
+    left_rotate_1(arr,k);
     
-
+    // final k rotated array
     for(int i=0;i<n;i++){
         cout << arr[i] << "->";
     }
