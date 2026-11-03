@@ -1,13 +1,13 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 int main() {
     
     int m;
-
+    cout << "Enter the order of the square matrix: " << endl;
+    cin >> m;
     vector<vector<int>> mat(m,vector<int>(m));
-    vector<int> res;
    
     for(int i=0;i<m;i++){
         for(int j=0;j<m;j++){
@@ -15,12 +15,27 @@ int main() {
             cin >> mat[i][j];
         }
     }
-
-    int left = 0;
-    int right = m-1;
-    int top = 0;
-    int bottom = m-1;
+   
+    for(int i=0;i<m;i++){
+        for(int j=0;j<=i;j++){
+            int temp = mat[i][j];
+            mat[i][j] = mat[j][i];
+            mat[j][i] = temp;
+        }
+    }
 
     
+    
+    for(int j=0;j<m/2;j++){
+        for(int i=0;i<m;i++){
+            int temp = mat[i][j];
+            mat[i][j] = mat[i][m-j-1];
+            mat[i][m-j-1] = temp;
+        }
+    }
+    
+
+
+
     return 0;
 }
