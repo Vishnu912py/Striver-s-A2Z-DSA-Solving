@@ -44,7 +44,7 @@ int main() {
     Solution s;
     vector<int> nums = {3,5,8,15,19};
 
-    int cnt = s.upperBound(nums,3);
+    int cnt = s.upperBound(nums,9);
     cout << cnt << endl;
     return 0;
 }
