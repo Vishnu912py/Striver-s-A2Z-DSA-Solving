@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-void merge(vector<int>& arr, int low,int mid, int high,vector<int>& res){
+void merge(vector<int>& arr, int low,int mid, int high,vector<int>& res,int count){
     int i= low;
     int j= mid+1;
     res.clear();
@@ -14,6 +14,7 @@ void merge(vector<int>& arr, int low,int mid, int high,vector<int>& res){
         }
 
         else{
+            count++;
             res.push_back(arr[j]);
             j++;
         }
@@ -36,18 +37,20 @@ void merge(vector<int>& arr, int low,int mid, int high,vector<int>& res){
     }
 }
 
-void merge_sort(int start,vector<int>& arr,int end,vector<int>& res){
+int merge_sort(int start,vector<int>& arr,int end,vector<int>& res,int count){
     
     if(start >= end){
-        return;
+
+        return count;
     }
+    
 
     int mid = start+(end-start)/2;
     //divide step
-    merge_sort(start,arr,mid,res);
-    merge_sort(mid+1,arr,end,res);
+    merge_sort(start,arr,mid,res,count);
+    merge_sort(mid+1,arr,end,res,count);
 
-    merge(arr,start,mid,end,res);
+    merge(arr,start,mid,end,res,count);
     
 
 
@@ -75,9 +78,9 @@ int main() {
         arr.push_back(input);
     }
 
-    merge_sort(0,arr,n-1,result);
+    int cnt = merge_sort(0,arr,n-1,result,0);
 
-
+    cout << cnt << endl;
     for(size_t i=0;i<arr.size();i++){
         cout << arr[i] << "->";
     }

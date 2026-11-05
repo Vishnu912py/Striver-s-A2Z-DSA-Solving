@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <limits.h>
 using namespace std;
 
 int findpivot(vector<int>& arr, int low,int high){
@@ -66,10 +67,26 @@ int main() {
     }
     //
     quick_sort(arr,0,n-1);
-    // result printing
-    for(int k=0;k< arr.size();k++){
-        cout << arr[k] << "->";
+    int max_sum = INT_MIN;
+    for(int i=0;i<arr.size();i++){
+        int k=0;
+        while(k<arr.size()-i){
+        
+            int sum = 0;
+            int l=i;
+            while(l<=k+i){
+                sum += arr[l];
+                l++;
+            }
+            if(sum > max_sum){
+                max_sum = sum;
+            }
+            
+            k++;
+        }
     }
+
+    cout << max_sum << endl;
 
     return 0;
 }
